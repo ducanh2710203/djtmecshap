@@ -1,0 +1,43 @@
+drop database qlkd;
+CREATE DATABASE QLKD;
+USE QLKD;
+
+CREATE TABLE Khachhang (
+    Makhach NVARCHAR(50) PRIMARY KEY,
+    Hoten NVARCHAR(100),
+    Ngaysinh NVARCHAR(50) -- Vì yêu cầu lưu ngày dạng NVARCHAR
+);
+
+CREATE TABLE Hanghoa (
+    Mahang NVARCHAR(50) PRIMARY KEY,
+    Tenhang NVARCHAR(100),
+    Chungloai NVARCHAR(100),
+    Dongia FLOAT,
+    Soluong INT
+);
+
+CREATE TABLE Hoadon (
+    Mahd NVARCHAR(50) PRIMARY KEY,
+	Ngaymua date, 
+    Makhach NVARCHAR(50),
+    Mahang NVARCHAR(50),
+    Soluong INT, 
+    FOREIGN KEY (Makhach) REFERENCES Khachhang(Makhach),
+    FOREIGN KEY (Mahang) REFERENCES Hanghoa(Mahang) 
+);
+
+
+
+INSERT INTO Khachhang (Makhach, Hoten, Ngaysinh) VALUES ('1', 'Nguyễn Văn A', '1990-05-15');
+INSERT INTO Khachhang (Makhach, Hoten, Ngaysinh) VALUES ('2', 'Nguyễn Văn A', '1990-05-15');
+
+INSERT INTO Hanghoa (Mahang, Tenhang, Chungloai, Dongia, Soluong) 
+VALUES ('1', 'Bánh Kẹo', 'Thực phẩm', 50000, 100);  -- Dongia và Soluong phải là số
+INSERT INTO Hanghoa (Mahang, Tenhang, Chungloai, Dongia, Soluong) 
+VALUES ('2', 'Bánh Kẹo', 'Thực phẩm', 50000, 100);  -- Dongia và Soluong phải là số
+
+
+
+INSERT INTO Hoadon (Mahd, Ngaymua, Makhach, Mahang, Soluong) 
+VALUES ('1', '2024-06-15', '1', '1', 2);
+
